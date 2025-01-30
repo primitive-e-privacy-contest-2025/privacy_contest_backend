@@ -1,5 +1,6 @@
 package com.primitive.privacy_contest.Repository.FileStorages;
 
+import com.primitive.privacy_contest.Repository.Services.Services;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,19 +11,20 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "file_storage")
+@Table(name = "FileStorages")
 public class FileStorages {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer fileId; // 파일 고유 ID (PK, 자동 증가)
 
-    @Column(nullable = false)
-    private Integer userId; // 파일 소유 사용자 ID (FK)
+    @ManyToOne
+    @JoinColumn(name = "userId", nullable = false) // 사용자 테이블과 연결 (FK)
+    private UserPerszonalInfo user;
 
-    @Column(nullable = false)
-    private Integer serviceId; // 파일 소유 서비스 ID (FK)
-
+    @ManyToOne
+    @JoinColumn(name = "serviceId", nullable = false) // 서비스 테이블과 연결 (FK)
+    private Services service;
     @Column(nullable = false, columnDefinition = "TEXT")
     private String filePath; // 저장된 파일 경로
 

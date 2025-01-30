@@ -1,5 +1,6 @@
 package com.primitive.privacy_contest.Repository.Services;
 
+import com.primitive.privacy_contest.Repository.CorporateUsers.CorporateUsers;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "services")
+@Table(name = "Services")
 public class Services {
 
     @Id
@@ -20,8 +21,10 @@ public class Services {
     @Column(nullable = false, length = 100)
     private String serviceName; // 서비스 이름
 
-    @Column(nullable = false)
-    private Integer corporateId; // 서비스 소유 기업 ID (FK)
+    @ManyToOne
+    @JoinColumn(name = "corporateId", nullable = false) // 기업 사용자와 연결 (FK)
+    private CorporateUsers corporateUser;
+
 
     @Column(columnDefinition = "TEXT")
     private String description; // 서비스 설명

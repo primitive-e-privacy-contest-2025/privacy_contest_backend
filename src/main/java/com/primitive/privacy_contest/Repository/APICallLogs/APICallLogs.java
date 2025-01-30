@@ -1,5 +1,6 @@
 package com.primitive.privacy_contest.Repository.APICallLogs;
 
+import com.primitive.privacy_contest.Repository.Services.Services;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,18 +11,20 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "api_call_logs")
+@Table(name = "APICallLogs")
 public class APICallLogs {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer logId; // 로그 ID (PK, 자동 증가)
 
-    @Column(nullable = false)
-    private Integer serviceId; // 호출한 서비스 ID (FK)
+    @ManyToOne
+    @JoinColumn(name = "serviceId", nullable = false) // 서비스 테이블과 연결 (FK)
+    private Services service;
 
-    @Column(nullable = false)
-    private Integer userId; // 요청을 보낸 사용자 ID (FK)
+    @ManyToOne
+    @JoinColumn(name = "userId", nullable = false) // 사용자 테이블과 연결 (FK)
+    private UserPerszonalInfo user;
 
     @Column(nullable = false, length = 255)
     private String endpoint; // 호출된 API 엔드포인트
