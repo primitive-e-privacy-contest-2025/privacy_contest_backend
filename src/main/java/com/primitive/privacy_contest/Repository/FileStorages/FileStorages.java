@@ -1,6 +1,6 @@
 package com.primitive.privacy_contest.Repository.FileStorages;
-
 import com.primitive.privacy_contest.Repository.Services.Services;
+import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInfo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +20,7 @@ public class FileStorages {
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false) // 사용자 테이블과 연결 (FK)
-    private UserPerszonalInfo user;
+    private UserPersonalInfo user;
 
     @ManyToOne
     @JoinColumn(name = "serviceId", nullable = false) // 서비스 테이블과 연결 (FK)
