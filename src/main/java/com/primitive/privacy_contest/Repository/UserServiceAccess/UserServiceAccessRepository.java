@@ -1,6 +1,5 @@
-package com.primitive.privacy_contest.Repository;
+package com.primitive.privacy_contest.Repository.UserServiceAccess;
 
-import com.primitive.privacy_contest.DTO.UserServiceAccess;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

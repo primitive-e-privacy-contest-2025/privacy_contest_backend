@@ -1,6 +1,6 @@
 package com.primitive.privacy_contest.Repository.APICallLogs;
 
-import com.primitive.privacy_contest.DTO.UserPersonalInfo;
+import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInfo;
 import com.primitive.privacy_contest.Repository.Services.Services;
 import jakarta.persistence.*;
 import lombok.Getter;

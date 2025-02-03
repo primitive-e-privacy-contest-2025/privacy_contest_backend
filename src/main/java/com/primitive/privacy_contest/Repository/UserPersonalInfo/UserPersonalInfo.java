@@ -1,4 +1,4 @@
-package com.primitive.privacy_contest.DTO;
+package com.primitive.privacy_contest.Repository.UserPersonalInfo;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,6 +1,6 @@
 package com.primitive.privacy_contest.Controller;
 
-import com.primitive.privacy_contest.DTO.UserPersonalInfo;
+import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInfo;
 import com.primitive.privacy_contest.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
