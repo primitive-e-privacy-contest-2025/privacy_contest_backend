@@ -7,43 +7,47 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "UserPersonalInfo")
+@Table(name = "User_Personal_Info")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class UserPersonalInfo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId; // 사용자 고유 ID
+    @Column(name = "user_id") // DB 컬럼명과 매칭
+    private Long userId;
 
-    @Column(nullable = false, unique = true, length = 20)
-    private String loginId; // 로그인 전용 ID (중복 불가)
+    @Column(name = "login_id", nullable = false, unique = true, length = 20)
+    private String loginId;
 
-    @Column(nullable = false)
-    private String loginPw; // SHA-256 암호화하여 저장되는 비밀번호
+    @Column(name = "login_pw", nullable = false)
+    private String loginPw;
 
-    @Column(nullable = false, length = 100)
-    private String fullName; // 사용자 실명
+    @Column(name = "full_name", nullable = false, length = 100)
+    private String fullName;
 
-    @Column(nullable = false, length = 100)
-    private String email; // 사용자 이메일
+    @Column(name = "email", nullable = false, length = 100)
+    private String email;
 
-    @Column(length = 20)
-    private String phoneNumber; // 전화번호 (선택 입력)
+    @Column(name = "phone_number", length = 20)
+    private String phoneNumber;
 
-    private LocalDate dateOfBirth; // 생년월일
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
 
-    @Column(columnDefinition = "TEXT")
-    private String address; // 주소 정보 (TEXT 타입)
+    @Column(name = "address", columnDefinition = "TEXT")
+    private String address;
 
-    @Column(nullable = false, updatable = false)
-    private Timestamp registrationDate; // 가입일 (수정 불가)
+    @Column(name = "registration_date", nullable = false, updatable = false)
+    private Timestamp registrationDate;
 
     @Enumerated(EnumType.STRING)
-    private AccountStatus status; // 계정 상태 (ACTIVE, INACTIVE, SUSPENDED)
+    @Column(name = "status")
+    private AccountStatus status;
 
-    @Column(length = 255)
-    private String googleUserId; // Google OAuth2 연동용 ID
+    @Column(name = "google_user_id", length = 255)
+    private String googleUserId;
 }

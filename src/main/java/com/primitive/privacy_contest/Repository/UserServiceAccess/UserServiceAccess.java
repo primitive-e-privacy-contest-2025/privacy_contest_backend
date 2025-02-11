@@ -7,30 +7,39 @@ import lombok.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "UserServiceAccess")
+@Table(name = "user_service_access")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class UserServiceAccess {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long accessId; // 서비스 접근 권한 ID
+    @Column(name = "access_id")
+    private Long accessId;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserPersonalInfo user; // 사용자 정보 (FK)
 
-    @Column(nullable = false)
-    private Long serviceId; // 서비스 소유 기업 ID
+    @Column(name = "service_id", nullable = false)
+    private Long serviceId; // 서비스 ID
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "access_status")
     private AccessStatus accessStatus; // 접근 상태 (GRANTED, DENIED, PENDING)
 
-    private boolean accessGranted; // 접근 허용 여부 (TRUE/FALSE)
+    @Column(name = "access_granted")
+    private boolean accessGranted;
 
-    private Timestamp accessStarted; // 서비스 접근 권한 부여 시작일
-    private Timestamp accessEnded; // 서비스 접근 권한 종료일 (유효기간)
-    private Timestamp lastAccessTime; // 마지막 서비스 접근 시간
+    @Column(name = "access_started")
+    private Timestamp accessStarted;
+
+    @Column(name = "access_ended")
+    private Timestamp accessEnded;
+
+    @Column(name = "last_access_time")
+    private Timestamp lastAccessTime;
 }
