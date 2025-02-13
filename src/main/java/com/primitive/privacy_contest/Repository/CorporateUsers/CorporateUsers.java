@@ -1,5 +1,6 @@
 package com.primitive.privacy_contest.Repository.CorporateUsers;
 
+import com.primitive.privacy_contest.DTO.RegistCorporateUserDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +13,39 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name = "CorporateUsers")
 public class CorporateUsers {
-
+    public CorporateUsers(RegistCorporateUserDTO R){
+        this.loginId=R.getLoginId();
+        this.loginPw=R.getLoginPw();
+        this.companyName=R.getCompanyName();
+        this.contactEmail=R.getContactEmail();
+        this.contactPhone=R.getContactPhone();
+        this.industry=R.getIndustry();
+        this.businessRegistrationNumber=R.getBusinessRegistrationNumber();
+        this.managerName=R.getManagerName();
+        this.managerEmail=R.getManagerEmail();
+        this.managerPhone=R.getManagerPhone();
+    }
+    public void patch(RegistCorporateUserDTO R){
+        this.loginId=R.getLoginId();
+        this.loginPw=R.getLoginPw();
+        this.companyName=R.getCompanyName();
+        this.contactEmail=R.getContactEmail();
+        this.contactPhone=R.getContactPhone();
+        this.industry=R.getIndustry();
+        this.businessRegistrationNumber=R.getBusinessRegistrationNumber();
+        this.managerName=R.getManagerName();
+        this.managerEmail=R.getManagerEmail();
+        this.managerPhone=R.getManagerPhone();
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer corporateId; // 기업 고유 ID (PK)
+
+    @Column(nullable = false, unique = true, length = 20)
+    private String loginId;
+
+    @Column(nullable = false)
+    private String loginPw; // SHA-256 암호화 저장
 
     @Column(nullable = false, length = 100)
     private String companyName; // 회사 이름
