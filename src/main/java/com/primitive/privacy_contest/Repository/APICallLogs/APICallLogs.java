@@ -1,6 +1,7 @@
 package com.primitive.privacy_contest.Repository.APICallLogs;
 
 import com.primitive.privacy_contest.Repository.Services.Services;
+import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInfo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,7 @@ public class APICallLogs {
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false) // 사용자 테이블과 연결 (FK)
-    private UserPerszonalInfo user;
+    private UserPersonalInfo user;
 
     @Column(nullable = false, length = 255)
     private String endpoint; // 호출된 API 엔드포인트
