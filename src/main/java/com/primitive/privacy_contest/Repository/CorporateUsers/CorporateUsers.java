@@ -39,7 +39,7 @@ public class CorporateUsers {
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer corporateId; // 기업 고유 ID (PK)
+    private Long corporateId; // 기업 고유 ID (PK)
 
     @Column(nullable = false, unique = true, length = 20)
     private String loginId;

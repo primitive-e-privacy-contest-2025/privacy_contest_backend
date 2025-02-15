@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CorporateUsersRepository extends JpaRepository<CorporateUsers, Integer> {
+public interface CorporateUsersRepository extends JpaRepository<CorporateUsers, Long> {
     List<CorporateUsers> findByLoginId(String loginId);
 }

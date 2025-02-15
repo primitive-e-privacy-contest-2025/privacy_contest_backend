@@ -16,7 +16,7 @@ public class Services {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer serviceId; // 서비스 고유 ID (PK)
+    private Long serviceId; // 서비스 고유 ID (PK)
 
     @Column(nullable = false, length = 100)
     private String serviceName; // 서비스 이름
@@ -24,7 +24,6 @@ public class Services {
     @ManyToOne
     @JoinColumn(name = "corporateId", nullable = false) // 기업 사용자와 연결 (FK)
     private CorporateUsers corporateUser;
-
 
     @Column(columnDefinition = "TEXT")
     private String description; // 서비스 설명

@@ -16,7 +16,7 @@ public class FileStorages {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer fileId; // 파일 고유 ID (PK, 자동 증가)
+    private Long fileId; // 파일 고유 ID (PK, 자동 증가)
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false) // 사용자 테이블과 연결 (FK)
