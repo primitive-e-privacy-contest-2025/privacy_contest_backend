@@ -17,16 +17,16 @@ public class CorporateService {
     @Autowired
     CorporateUsersRepository corporateUsersRepository;
 
-    public Integer registCorporateUser(RegistCorporateUserDTO RegistCorporateUserDTO){
+    public Long registCorporateUser(RegistCorporateUserDTO RegistCorporateUserDTO){
         try {
             CorporateUsers t=new CorporateUsers(RegistCorporateUserDTO);
             corporateUsersRepository.save(t);
             return t.getCorporateId();
         }catch (Exception e){
-            return -1;
+            return (long) -1;
         }
     }
-    public int loginCorporateUser(LoginDTO loginDTO){
+    public Long loginCorporateUser(LoginDTO loginDTO){
         try {
             List<CorporateUsers> CorporateUsers = corporateUsersRepository.findByLoginId(loginDTO.getLoginId());
             boolean flag=false;
@@ -37,17 +37,17 @@ public class CorporateService {
                 return CorporateUsers.get(0).getCorporateId();
             }
             else {
-                return -1;
+                return (long)-1;
             }
         }catch (Exception e){
-            return -1;
+            return (long)-1;
         }
     }
 
 
     public Integer patchCoporateUser(String corporateId, RegistCorporateUserDTO registCorporateUserDTO) {
         try {
-            int id = Integer.getInteger(corporateId);
+            long id = Integer.getInteger(corporateId);
             Optional<CorporateUsers> optional = corporateUsersRepository.findById(id);
             optional.get().patch(registCorporateUserDTO);
             return 0;
@@ -58,7 +58,7 @@ public class CorporateService {
     }
 
     public void deleteCoporateUser(String corporateId) {
-        Optional<CorporateUsers> optional = corporateUsersRepository.findById(Integer.getInteger(corporateId));
+        Optional<CorporateUsers> optional = corporateUsersRepository.findById(Long.getLong(corporateId));
         corporateUsersRepository.delete(optional.get());
     }
 }
