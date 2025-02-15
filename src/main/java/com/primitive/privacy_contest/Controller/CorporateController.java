@@ -17,18 +17,18 @@ public class CorporateController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> loginBusiness(@RequestBody LoginDTO loginDTO) {
-        Integer result=corporateService.loginCorporateUser(loginDTO);
+        Long result=corporateService.loginCorporateUser(loginDTO);
         return ResponseEntity.ok(Map.of(
                 "corporateID", result.toString()
         ));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Integer> registerBusiness(@RequestBody RegistCorporateUserDTO RegistCorporateUserDTO) {
-        int result =0;
+    public ResponseEntity<Long> registerBusiness(@RequestBody RegistCorporateUserDTO RegistCorporateUserDTO) {
+        long result =0;
         result= corporateService.registCorporateUser(RegistCorporateUserDTO);
         if (result<=0){
-            return ResponseEntity.ok(-1);
+            return ResponseEntity.ok((long)-1);
         }
         return ResponseEntity.ok(result);//기업의 db index 반환
     }
