@@ -22,8 +22,8 @@ public class Services {
     private String serviceName; // 서비스 이름
 
     @ManyToOne
-    @JoinColumn(name = "corporateId", nullable = false) // 기업 사용자와 연결 (FK)
-    private CorporateUsers corporateUser;
+    @JoinColumn(nullable = false) // 기업 사용자와 연결 (FK)
+    private CorporateUsers corporateUsers;
 
     @Column(columnDefinition = "TEXT")
     private String description; // 서비스 설명

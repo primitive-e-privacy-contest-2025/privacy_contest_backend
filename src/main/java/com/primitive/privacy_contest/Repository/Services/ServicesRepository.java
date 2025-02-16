@@ -8,7 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ServicesRepository extends JpaRepository<Services, Long> {
-
-
     List<Services> findByCorporateUsers(CorporateUsers corporateUsers);
 }

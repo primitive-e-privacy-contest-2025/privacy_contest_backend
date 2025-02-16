@@ -36,7 +36,7 @@ public class ServicesService {
             service.setServiceName(registServiceDTO.getServiceName());
             service.setDescription(registServiceDTO.getDescription());
             service.setStatus(ServiceStatus.ACTIVE);
-            service.setCorporateUser(corporateUser);
+            service.setCorporateUsers(corporateUser);
             String APIKey = new String("232321312312321312312");
             service.setApiKey(APIKey);
             servicesRepository.save(service);

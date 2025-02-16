@@ -19,14 +19,16 @@ public class FileStorages {
     private Long fileId; // 파일 고유 ID (PK, 자동 증가)
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false) // 사용자 테이블과 연결 (FK)
+    @JoinColumn(name = "user", nullable = false) // 사용자 테이블과 연결 (FK)
     private UserPersonalInfo user;
 
     @ManyToOne
-    @JoinColumn(name = "serviceId", nullable = false) // 서비스 테이블과 연결 (FK)
+    @JoinColumn(name = "services", nullable = false) // 서비스 테이블과 연결 (FK)
     private Services service;
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String filePath; // 저장된 파일 경로
+
+    @Lob
+    @Column(nullable = false)
+    private byte[] fileData; // 저장된 파일을 BLOB으로 저장
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now(); // 파일 생성 시간 (기본값: 현재 시간)
