@@ -30,6 +30,9 @@ public class UserActivity {
     @Column(name = "activity_type", nullable = false, length = 100)
     private String activityType; // "로그인", "조회", "업로드" 등
 
+    @Column(name = "metadata", nullable = false, length = 100)
+    private String metadata; // "관련정보
+
     @Column(name = "activity_timestamp", nullable = false)
     private Timestamp activityTimestamp;
 }
