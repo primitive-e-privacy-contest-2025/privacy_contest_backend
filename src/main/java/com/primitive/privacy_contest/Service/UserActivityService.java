@@ -1,4 +1,4 @@
-package com.primitive.privacy_contest.Repository.UserServices;
+package com.primitive.privacy_contest.Service;
 
 import com.primitive.privacy_contest.Repository.UserActivity.UserActivity;
 import com.primitive.privacy_contest.Repository.UserActivity.UserActivityRepository;
