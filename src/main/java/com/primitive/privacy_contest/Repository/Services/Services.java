@@ -30,7 +30,7 @@ public class Services {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private ServiceStatus status; // 서비스 상태 (ENUM)
+    private ServiceStatus status=ServiceStatus.ACTIVE; // 서비스 상태 (ENUM)
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now(); // 서비스 생성일 (기본값: 현재 시간)
