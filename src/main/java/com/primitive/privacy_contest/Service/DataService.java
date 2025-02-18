@@ -35,6 +35,8 @@ public class DataService {
     APICallLogsRepository apiCallLogsRepository;
     @Autowired
     FileStoragesRepository fileStoragesRepository;
+    @Autowired
+    UserPersonalInfoRepository userRepository;
 
     public void createActivityData (long userId, long serviceId, String apikey, Byte[] csvdata){
         UserPersonalInfo user = userPersonalInfoRepository.findById(userId).get();
@@ -87,7 +89,9 @@ public class DataService {
         }
     }
     public void getActivityDataForCorp(long userId, long serviceId,String apikey){
-        List<UserServiceAccess> accessService = userServiceAccessRepository.findByUser_UserId(userId);
+        UserPersonalInfo user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        List<UserServiceAccess> accessService = userServiceAccessRepository.findByUser(user);
 
         for (int i = 0; i < accessService.size(); i++) {
             if(accessService.get(i).getServiceId()==serviceId){

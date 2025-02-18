@@ -7,43 +7,47 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "UserPersonalInfo")
+@Table(name = "User_Personal_Info")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class UserPersonalInfo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id") // DB 컬럼명과 매칭
     private Long userId;
 
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(name = "login_id", nullable = false, unique = true, length = 20)
     private String loginId;
 
-    @Column(nullable = false)
-    private String loginPw; // SHA-256 암호화 저장
+    @Column(name = "login_pw", nullable = false)
+    private String loginPw;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "full_name", nullable = false, length = 100)
     private String fullName;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "email", nullable = false, length = 100)
     private String email;
 
-    @Column(length = 20)
+    @Column(name = "phone_number", length = 20)
     private String phoneNumber;
 
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "address", columnDefinition = "TEXT")
     private String address;
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "registration_date", nullable = false, updatable = false)
     private Timestamp registrationDate;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private AccountStatus status;
 
-    @Column(length = 255)
+    @Column(name = "google_user_id", length = 255)
     private String googleUserId;
 }

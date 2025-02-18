@@ -1,6 +1,6 @@
 package com.primitive.privacy_contest.Repository.FileStorages;
+
 import com.primitive.privacy_contest.Repository.Services.Services;
-import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInfo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
