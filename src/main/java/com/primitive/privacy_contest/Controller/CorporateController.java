@@ -127,16 +127,6 @@ public class CorporateController {
     public ResponseEntity<Long> registerBusiness(@org.springframework.web.bind.annotation.RequestBody RegistCorporateUserDTO RegistCorporateUserDTO) {
         long result = corporateService.registCorporateUser(RegistCorporateUserDTO);
 
-        System.out.println(RegistCorporateUserDTO.getIndustry());
-        System.out.println(RegistCorporateUserDTO.getContactEmail());
-        System.out.println(RegistCorporateUserDTO.getCompanyName());
-        System.out.println(RegistCorporateUserDTO.getManagerEmail());
-        System.out.println(RegistCorporateUserDTO.getManagerName());
-        System.out.println(RegistCorporateUserDTO.getManagerEmail());
-        System.out.println(RegistCorporateUserDTO.getManagerPhone());
-        System.out.println(RegistCorporateUserDTO.getContactPhone());
-        System.out.println(RegistCorporateUserDTO.getContactPhone());
-
 
         return ResponseEntity.ok(result); // 기업의 DB index 반환
     }

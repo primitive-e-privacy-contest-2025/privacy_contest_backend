@@ -20,17 +20,6 @@ public class CorporateService {
     public Long registCorporateUser(RegistCorporateUserDTO RegistCorporateUserDTO){
         try {
             CorporateUsers t=new CorporateUsers(RegistCorporateUserDTO);
-
-            System.out.println(t.getCorporateId());
-            System.out.println(t.getContactEmail());
-            System.out.println(t.getCompanyName());
-            System.out.println(t.getManagerEmail());
-            System.out.println(t.getManagerName());
-            System.out.println(t.getManagerEmail());
-            System.out.println(t.getManagerPhone());
-            System.out.println(t.getContactPhone());
-            System.out.println(t.getContactPhone());
-
             corporateUsersRepository.save(t);
             return t.getCorporateId();
         }catch (Exception e){
