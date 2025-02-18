@@ -1,4 +1,4 @@
-package com.primitive.privacy_contest.Repository.UserServices;
+package com.primitive.privacy_contest.Service;
 
 import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInfo;
 import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInfoRepository;
@@ -19,6 +19,20 @@ public class UserServiceAccessService {
     public UserServiceAccessService(UserServiceAccessRepository userServiceAccessRepository, UserPersonalInfoRepository userRepository) {
         this.userServiceAccessRepository = userServiceAccessRepository;
         this.userRepository = userRepository;
+    }
+
+    public long requestAccess(Long serviceId, Long user_id) {
+        try {
+            UserPersonalInfo user = userRepository.findById(user_id).get();
+            UserServiceAccess userServiceAccess = new UserServiceAccess();
+            userServiceAccess.setServiceId(serviceId);
+            userServiceAccess.setUser(user);
+            userServiceAccess.setAccessStatus(AccessStatus.PENDING);
+            userServiceAccessRepository.save(userServiceAccess);
+            return userServiceAccess.getAccessId();
+        } catch (Exception e) {
+            return -1;
+        }
     }
 
     //특정 사용자의 서비스 접근 권한 목록 조회
