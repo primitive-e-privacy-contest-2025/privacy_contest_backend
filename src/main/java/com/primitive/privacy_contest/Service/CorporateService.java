@@ -20,6 +20,17 @@ public class CorporateService {
     public Long registCorporateUser(RegistCorporateUserDTO RegistCorporateUserDTO){
         try {
             CorporateUsers t=new CorporateUsers(RegistCorporateUserDTO);
+
+            System.out.println(t.getCorporateId());
+            System.out.println(t.getContactEmail());
+            System.out.println(t.getCompanyName());
+            System.out.println(t.getManagerEmail());
+            System.out.println(t.getManagerName());
+            System.out.println(t.getManagerEmail());
+            System.out.println(t.getManagerPhone());
+            System.out.println(t.getContactPhone());
+            System.out.println(t.getContactPhone());
+
             corporateUsersRepository.save(t);
             return t.getCorporateId();
         }catch (Exception e){
@@ -47,9 +58,10 @@ public class CorporateService {
 
     public Integer patchCoporateUser(String corporateId, RegistCorporateUserDTO registCorporateUserDTO) {
         try {
-            long id = Integer.getInteger(corporateId);
-            Optional<CorporateUsers> optional = corporateUsersRepository.findById(id);
-            optional.get().patch(registCorporateUserDTO);
+            long id = Long.parseLong(corporateId);
+            CorporateUsers corporateUsers = corporateUsersRepository.findById(id).get();
+            corporateUsers.patch(registCorporateUserDTO);
+            corporateUsersRepository.save(corporateUsers);
             return 0;
 
         }catch (Exception e){
@@ -57,8 +69,15 @@ public class CorporateService {
         }
     }
 
-    public void deleteCoporateUser(String corporateId) {
-        Optional<CorporateUsers> optional = corporateUsersRepository.findById(Long.getLong(corporateId));
-        corporateUsersRepository.delete(optional.get());
+    public long deleteCoporateUser(String corporateId) {
+        try {
+            long id = Long.parseLong(corporateId);
+            Optional<CorporateUsers> optional = corporateUsersRepository.findById(Long.parseLong(corporateId));
+            corporateUsersRepository.delete(optional.get());
+            return id;
+        }catch (Exception e){
+            return-1;
+        }
+
     }
 }

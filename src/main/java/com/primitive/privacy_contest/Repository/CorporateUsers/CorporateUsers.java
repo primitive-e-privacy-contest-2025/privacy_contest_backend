@@ -67,7 +67,7 @@ public class CorporateUsers {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private CompanyStatus companyStatus; // 기업 상태 (ENUM)
+    private CompanyStatus companyStatus= CompanyStatus.ACTIVE; // 기업 상태 (ENUM)
 
     @Column(nullable = false, length = 100)
     private String managerName; // 담당자 이름
