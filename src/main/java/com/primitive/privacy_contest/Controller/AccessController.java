@@ -20,13 +20,13 @@ public class AccessController {
         return ResponseEntity.ok(Map.of("message",result));
     }
     @PostMapping("/{user_id}/grant")
-    public ResponseEntity<Map<String, Object>> grantRequest(@PathVariable Long user_id, @RequestBody String requestId) {
+    public ResponseEntity<Map<String, String>> grantRequest(@PathVariable Long user_id, @RequestBody String requestId) {
         accessService.grantRequest(user_id,requestId);
-        return ResponseEntity.ok(Map.of());
+        return ResponseEntity.ok(Map.of("message", "Corporate information updated successfully"));
     }
     @PostMapping("/{user_id}/deny")
-    public ResponseEntity<Map<String, Object>> denyRequest(@PathVariable Long user_id, @RequestBody String requestId) {
+    public ResponseEntity<Map<String, String>> denyRequest(@PathVariable Long user_id, @RequestBody String requestId) {
         accessService.rejectRequest(user_id,requestId);
-        return ResponseEntity.ok(Map.of());
+        return ResponseEntity.ok(Map.of("message", "Corporate information updated successfully"));
     }
 }

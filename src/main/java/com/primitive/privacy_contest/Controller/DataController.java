@@ -21,14 +21,14 @@ public class DataController {
 
 
 
-    @GetMapping("/{user_id}")
+/*    @GetMapping("/{user_id}")
     public ResponseEntity<Map<String, Object>> getData(@PathVariable Long user_id) {
         return ResponseEntity.ok(Map.of(
                 "user_id", user_id,
                 "email", "test@example.com",
                 "phone_number", "01012345678"
         ));
-    }
+    }*/
 
     @PostMapping("/{user_id}/{service_id}/activity")
     public ResponseEntity<Map<String, String>> storeUserActivity(@PathVariable Long user_id, @PathVariable Long service_id, @RequestBody Map<String, Object> request) {
