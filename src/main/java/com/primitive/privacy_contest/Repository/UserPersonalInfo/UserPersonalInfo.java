@@ -45,9 +45,10 @@ public class UserPersonalInfo {
     private Timestamp registrationDate;
 
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     @Column(name = "status")
-    private AccountStatus status;
+    private AccountStatus status=AccountStatus.ACTIVE;
 
-    @Column(name = "google_user_id", length = 255)
+    @Column(name = "google_user_id", length = 255,nullable = true)
     private String googleUserId;
 }
