@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "User_Personal_Info")
@@ -42,7 +43,8 @@ public class UserPersonalInfo {
     private String address;
 
     @Column(name = "registration_date", nullable = false, updatable = false)
-    private Timestamp registrationDate;
+    @Builder.Default
+    private LocalDateTime registrationDate = LocalDateTime.now(); // 유저 가입일
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
