@@ -1,5 +1,6 @@
 package com.primitive.privacy_contest.Service;
 
+import com.primitive.privacy_contest.DTO.LoginDTO;
 import com.primitive.privacy_contest.DTO.RegistUserDTO;
 import com.primitive.privacy_contest.Repository.CorporateUsers.CorporateUsers;
 import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInfo;
@@ -7,6 +8,9 @@ import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInf
 import jakarta.validation.constraints.Null;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,11 +35,26 @@ public class UserService {
             userRepo.save(newUser);
             return newUser.getUserId();
         }catch (Exception e){
-            return (long) -1;
+            e.printStackTrace();
+            return -1L;
         }
 
     }
-
+    public Long loginUser(LoginDTO loginDTO){
+        try {
+            Optional<UserPersonalInfo> users = userRepo.findByLoginId(loginDTO.getLoginId());
+            boolean flag=users.isPresent();
+            //flag가 true라면 존재하는 유저
+            if(flag&&users.get().getLoginPw().equals(loginDTO.getLoginPw())){
+                return users.get().getUserId();
+            }
+            else {
+                return -1L;
+            }
+        }catch (Exception e){
+            return -1L;
+        }
+    }
 
     public UserPersonalInfo updateUser(Long userId, RegistUserDTO updatedUser) {
         UserPersonalInfo user = getUserById(userId);
