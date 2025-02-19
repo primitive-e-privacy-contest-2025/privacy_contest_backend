@@ -1,5 +1,6 @@
 package com.primitive.privacy_contest.Controller;
 
+import com.primitive.privacy_contest.DTO.LoginDTO;
 import com.primitive.privacy_contest.DTO.RegistCorporateUserDTO;
 import com.primitive.privacy_contest.DTO.RegistUserDTO;
 import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInfo;
@@ -12,6 +13,8 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -55,7 +58,6 @@ public class UserController {
                             examples = @ExampleObject(
                                     name = "등록 요청 예시(다 있어야함)",
                                     value = "{\n" +
-                                            "  \"userId\": \"1\",\n" +
                                             "  \"loginId\": \"testUser\",\n" +
                                             "  \"loginPw\": \"encryptedPassword\",\n" +
                                             "  \"fullName\": \"홍길동\",\n" +
@@ -63,10 +65,10 @@ public class UserController {
                                             "  \"phoneNumber\": \"010-1234-5678\",\n" +
                                             "  \"dateOfBirth\": \"1990-01-01\",\n" +
                                             "  \"address\": \"서울시 강남구 테헤란로 123\",\n" +
-                                            "  \"status\": \"ACTIVE\",\n" +
-                                            "  \"googleUserId\": \"null\",\n" +
+                                            "  \"googleUserId\": \"null\"\n" +
                                             "}"
                             )
+
                     )
             ),
             responses = {
@@ -95,9 +97,56 @@ public class UserController {
             }
     )
     public ResponseEntity<Long> registerUser(@org.springframework.web.bind.annotation.RequestBody RegistUserDTO registUserDTO) {
+        System.out.println(registUserDTO.toString());
         long result = userService.createUser(registUserDTO);
 
         return ResponseEntity.ok(result); // 기업의 DB index 반환
+    }
+    @PostMapping("/login")
+    @Operation(
+            summary = "일반 사용자 로그인",
+            description = "일반 사용자로 로그인합니다.",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "로그인 정보",
+                    required = true,
+                    content = @Content(
+                            mediaType = "application/json",
+                            examples = @ExampleObject(
+                                    name = "로그인 요청 예시",
+                                    value = "{\n  \"loginId\": \"UserId\",\n  \"loginPw\": \"encryptedPassword\"\n}"
+                            )
+                    )
+            ),
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "로그인 성공",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = @ExampleObject(
+                                            name = "로그인 성공 예시",
+                                            value = "{\n  \"userId\": \"1\"\n}"
+                                    )
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "-1",
+                            description = "로그인 실패",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = @ExampleObject(
+                                            name = "로그인 실패 예시",
+                                            value = "{\n  \"userId\": \"-1\"\n}"
+                                    )
+                            )
+                    )
+            }
+    )
+    public ResponseEntity<Map<String, String>> loginUser(@org.springframework.web.bind.annotation.RequestBody LoginDTO loginDTO) {
+        Long result = userService.loginUser(loginDTO);
+        System.out.println(loginDTO.getLoginId());
+        System.out.println(loginDTO.getLoginPw());
+        return ResponseEntity.ok(Map.of("userId", result.toString()));
     }
 
 
@@ -123,12 +172,22 @@ public class UserController {
                                                     "  \"dateOfBirth\": \"1990-01-01\",\n" +
                                                     "  \"address\": \"서울시 강남구 테헤란로 123\",\n" +
                                                     "  \"status\": \"ACTIVE\",\n" +
-                                                    "  \"googleUserId\": \"null\",\n" +
+                                                    "  \"googleUserId\": \"null\"\n" +
                                                     "}"
                                     )
                             )
                     ),
-                    @ApiResponse(responseCode = "404", description = "해당 사용자를 찾을 수 없음")
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "해당 사용자를 찾을 수 없음",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = @ExampleObject(
+                                            name = "수정 후 사용자 정보 예시",
+                                            value = "{message: 해당 사용자를 찾을 수 없음}"
+                                    )
+                            )
+                    )
             }
     )
     public ResponseEntity<UserPersonalInfo> updateUser(
@@ -146,8 +205,8 @@ public class UserController {
                     @ApiResponse(responseCode = "404", description = "해당 사용자를 찾을 수 없음")
             }
     )
-    public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
+    public ResponseEntity<Map<String, String>> deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(Map.of("message", "사용자 삭제 성공"));
     }
 }
