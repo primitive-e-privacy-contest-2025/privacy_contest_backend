@@ -9,11 +9,13 @@ import com.primitive.privacy_contest.Repository.CorporateUsers.CorporateUsersRep
 import com.primitive.privacy_contest.Repository.Services.ServiceStatus;
 import com.primitive.privacy_contest.Repository.Services.Services;
 import com.primitive.privacy_contest.Repository.Services.ServicesRepository;
+import com.primitive.privacy_contest.SeedGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.spi.ServiceRegistry;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,17 +30,18 @@ public class ServicesService {
 
     public ServiceRegistDTO registerService(RegistServiceDTO registServiceDTO){
         try {
-            long id = Long.getLong(registServiceDTO.getCorporateUserID());
+            long id = Long.parseLong(registServiceDTO.getCorporateUserID());
             CorporateUsers corporateUser = corporateUsersRepository.findById(id).get();
 
-            Services service =new Services();
-
-            service.setServiceName(registServiceDTO.getServiceName());
-            service.setDescription(registServiceDTO.getDescription());
-            service.setStatus(ServiceStatus.ACTIVE);
-            service.setCorporateUsers(corporateUser);
-            String APIKey = new String("232321312312321312312");
-            service.setApiKey(APIKey);
+            Services service =Services.builder()
+                    .serviceName(registServiceDTO.getServiceName())
+                    .description(registServiceDTO.getDescription())
+                    .apiKey(SeedGenerator.generate32CharSeed(registServiceDTO.getServiceName(),registServiceDTO.getDescription()))
+                    .status(ServiceStatus.ACTIVE)
+                    .corporateUsers(corporateUser)
+                    .createdAt(LocalDateTime.now())
+                    .build();
+            System.out.println(service);
             servicesRepository.save(service);
 
             ServiceRegistDTO serviceRegistDTO = new ServiceRegistDTO(service.getServiceId().toString(),service.getApiKey());
@@ -58,13 +61,13 @@ public class ServicesService {
             return list;
         }catch (Exception e){
             List<Services> list= new ArrayList<>();
+            return list;
         }
-        return List.of();
     }
 
     public Integer patchService(String ServiceID, GetServiceDataDTO dataDTO) {
         try {
-            long id = Long.getLong(ServiceID);
+            long id = Long.parseLong(ServiceID);
             Services service = servicesRepository.findById(id).get();
             service.setServiceName(dataDTO.getServiceName());
             service.setDescription(dataDTO.getDescription());
@@ -76,7 +79,7 @@ public class ServicesService {
     }
 
     public void deleteService(String ServiceId) {
-        Optional<Services> optional = servicesRepository.findById(Long.getLong(ServiceId));
+        Optional<Services> optional = servicesRepository.findById(Long.parseLong(ServiceId));
         servicesRepository.delete(optional.get());
     }
 }
