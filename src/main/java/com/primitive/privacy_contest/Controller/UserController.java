@@ -55,6 +55,7 @@ public class UserController {
                             examples = @ExampleObject(
                                     name = "등록 요청 예시(다 있어야함)",
                                     value = "{\n" +
+                                            "  \"userId\": \"1\",\n" +
                                             "  \"loginId\": \"testUser\",\n" +
                                             "  \"loginPw\": \"encryptedPassword\",\n" +
                                             "  \"fullName\": \"홍길동\",\n" +
@@ -62,6 +63,8 @@ public class UserController {
                                             "  \"phoneNumber\": \"010-1234-5678\",\n" +
                                             "  \"dateOfBirth\": \"1990-01-01\",\n" +
                                             "  \"address\": \"서울시 강남구 테헤란로 123\",\n" +
+                                            "  \"status\": \"ACTIVE\",\n" +
+                                            "  \"googleUserId\": \"null\",\n" +
                                             "}"
                             )
                     )
