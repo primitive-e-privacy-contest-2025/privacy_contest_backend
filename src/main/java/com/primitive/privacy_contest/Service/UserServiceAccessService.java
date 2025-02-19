@@ -46,7 +46,8 @@ public class UserServiceAccessService {
     public void grantAccess(Long userId, Long serviceId) {
         UserPersonalInfo user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-
+        //todo 기존것 찾아서 수정 또는 없는 요청이면 허가 새로 생성
+        //todo 요청생성시에도 기존 수락이 되어있으면 새로  생성 x
         UserServiceAccess access = UserServiceAccess.builder()
                 .user(user)
                 .serviceId(serviceId)
