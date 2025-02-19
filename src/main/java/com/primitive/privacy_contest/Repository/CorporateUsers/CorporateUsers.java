@@ -5,12 +5,15 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
+@ToString
 @Table(name = "CorporateUsers")
 public class CorporateUsers {
     public CorporateUsers(RegistCorporateUserDTO R){
@@ -63,7 +66,7 @@ public class CorporateUsers {
     private String businessRegistrationNumber; // 사업자 등록번호
 
     @Column(nullable = false, updatable = false)
-    private LocalDateTime registrationDate = LocalDateTime.now(); // 회사 등록일
+    private LocalDateTime registrationDate = LocalDateTime.now(); // 회사 가입일
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)

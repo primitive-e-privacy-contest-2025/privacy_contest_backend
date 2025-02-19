@@ -19,4 +19,16 @@ public class RegistUserDTO {
     private String phoneNumber;
     private LocalDate dateOfBirth;
     private String address;
+    @Override
+    public String toString() {
+        return "User{" +
+                "loginId='" + loginId + '\'' +
+                ", loginPw='" + loginPw + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }
