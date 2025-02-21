@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user_service_access")
@@ -34,11 +35,11 @@ public class UserServiceAccess {
     private boolean accessGranted;
 
     @Column(name = "access_started")
-    private Timestamp accessStarted;
+    private LocalDateTime accessStarted;
 
     @Column(name = "access_ended")
-    private Timestamp accessEnded;
+    private LocalDateTime accessEnded;
 
     @Column(name = "last_access_time")
-    private Timestamp lastAccessTime;
+    private LocalDateTime lastAccessTime;
 }

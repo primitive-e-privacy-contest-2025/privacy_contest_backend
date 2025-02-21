@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user/services")
+@RequestMapping("access/user/{userId}/services")
 @Tag(name = "User Service Access API", description = "사용자 서비스 접근 권한 관리 API")
 public class UserServiceAccessController {
 
@@ -22,7 +22,7 @@ public class UserServiceAccessController {
     public UserServiceAccessController(UserServiceAccessService userServiceAccessService) {
         this.userServiceAccessService = userServiceAccessService;
     }
-    @PostMapping("/{userId}/request/{serviceId}")
+    @PostMapping("/{serviceId}/request/")
     @Operation(
             summary = "서비스 접근 요청 생성",
             description = "특정 서비스(serviceId)의 관리자가 지정된 사용자(userId)에게 접근 요청을 생성하는데에 사용.",
@@ -46,7 +46,7 @@ public class UserServiceAccessController {
         return ResponseEntity.ok("✅ 서비스 접근 요청생성");
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping
     @Operation(
             summary = "사용자의 서비스 접근 권한 목록 조회",
             description = "특정 사용자(userId)의 서비스 접근 권한 목록을 조회합니다.",
@@ -71,7 +71,7 @@ public class UserServiceAccessController {
         return ResponseEntity.ok(userServiceAccessService.getUserServices(userId));
     }
 
-    @PostMapping("/{userId}/grant/{serviceId}")
+    @PostMapping("/{serviceId}/grant/")
     @Operation(
             summary = "서비스 접근 권한 허가",
             description = "특정 사용자(userId)에게 특정 서비스(serviceId)의 접근 권한을 허가합니다.",
@@ -97,7 +97,7 @@ public class UserServiceAccessController {
         return ResponseEntity.ok("✅ 서비스 접근 권한 허가 완료");
     }
 
-    @PostMapping("/{userId}/deny/{serviceId}")
+    @PostMapping("/{serviceId}/deny/")
     @Operation(
             summary = "서비스 접근 권한 거부",
             description = "특정 사용자(userId)에게 특정 서비스(serviceId)의 접근 권한을 거부합니다.",
