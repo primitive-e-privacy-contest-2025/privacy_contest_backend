@@ -23,7 +23,7 @@ public class Services {
     private String serviceName; // 서비스 이름
 
     @ManyToOne
-    @JoinColumn(name = "corporateId", nullable = false) // 기업 사용자와 연결 (FK)
+    @JoinColumn(nullable = false) // 기업 사용자와 연결 (FK)
     private CorporateUsers corporateUsers;
 
     @Column(columnDefinition = "TEXT")
