@@ -1,8 +1,9 @@
 package com.primitive.privacy_contest.Service;
 
 import com.primitive.privacy_contest.DTO.ActivityDTO;
-import com.primitive.privacy_contest.Repository.CorporateUsers.CorporateUsers;
+import com.primitive.privacy_contest.DTO.ApiCallLogDTO;
 import com.primitive.privacy_contest.Repository.CorporateUsers.CorporateUsersRepository;
+import com.primitive.privacy_contest.Repository.Services.Services;
 import com.primitive.privacy_contest.Repository.Services.ServicesRepository;
 import com.primitive.privacy_contest.Repository.UserActivity.UserActivity;
 import com.primitive.privacy_contest.Repository.UserActivity.UserActivityRepository;
@@ -10,10 +11,8 @@ import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInf
 import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,16 +26,29 @@ public class UserActivityService {
     private ServicesRepository servicesRepository;
     @Autowired
     private CorporateUsersRepository corporateUsersRepository;
+    @Autowired
+    private ApiCallLogService apiCallLogService;
 
     public UserActivityService(UserActivityRepository userActivityRepository, UserPersonalInfoRepository userRepository) {
         this.userActivityRepository = userActivityRepository;
         this.userRepository = userRepository;
     }
 
-    public List<UserActivity>  getUserActivityByCorp(Long userId,Long serviceId,String apiKey ){
+    public List<UserActivity> getUserActivityByCorp(Long userId,Long serviceId,String apiKey ){
+        long starttime=System.currentTimeMillis();
         if (servicesRepository.findById(serviceId).get().getApiKey().equals(apiKey)){
             UserPersonalInfo user = userService.getUserById(userId);
+            Services services =servicesRepository.findById(serviceId).get();
             List<UserActivity> userActivities = userActivityRepository.findByUserAndServiceId(user, serviceId);
+            ApiCallLogDTO context=ApiCallLogDTO.builder()
+                    .service(services.getServiceName())
+                    .user(user.getLoginId())
+                    .endpoint("/user/{userId}/services/{serviceId}/activity")
+                    .requestTime(LocalDateTime.now())
+                    .responseAbstract("api에의해 유저의 일부정보가 제공되었습니다.")
+                    .build();
+            long resultTime=System.currentTimeMillis()-starttime;
+            apiCallLogService.putApiCallLog(services,user, context,resultTime);
             return userActivities;
         }
         return null;

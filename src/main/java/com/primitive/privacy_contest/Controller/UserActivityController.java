@@ -51,7 +51,7 @@ public class UserActivityController {
     }
 
     @Operation(
-            summary = "사용자 활동 조회",
+            summary = "기업의 사용자 활동 조회",
             description = "특정 사용자 및 서비스에 대한 활동 로그를 API Key와 함께 조회합니다."
 
     )
@@ -89,7 +89,7 @@ public class UserActivityController {
                     content = @Content(
                             mediaType = "application/json",
                             schema = @Schema(implementation = ActivityDTO.class),
-                            examples = @ExampleObject(name = "ActivityDTO", value = "{\"activityType\": \"로그인\", \"metadata\": \"성공적으로 로그인함\"}")
+                            examples = @ExampleObject(name = "ActivityDTO", value = "{\"activityType\": \"로그인\", \"metadata\": \"{'service': 'testService','result':'성공적으로 로그인함'}\"}")
                     )
             ) @org.springframework.web.bind.annotation.RequestBody ActivityDTO activityDTO
     ) {
