@@ -18,8 +18,7 @@ public class SwaggerConfiguration {
                         .title("Privacy Contest API")
                         .version("1.0")
                         .description("이 API는 개인정보 보호 대회 관련 API 문서입니다."))
-                .servers(List.of(
-                        new Server().url("https://primitive-backend.run.goorm.site/")  // 실제 API 요청을 보낼 서버 URL
+                .servers(List.of(new Server().url("https://primitive-backend.run.goorm.site/")  // 실제 API 요청을 보낼 서버 URL
                 ));
     }
 }

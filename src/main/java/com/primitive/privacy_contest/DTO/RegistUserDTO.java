@@ -18,7 +18,7 @@ public class RegistUserDTO {
     private String email;
     private String phoneNumber;
     private LocalDate dateOfBirth;
-    private String address;
+    private String gender;
     @Override
     public String toString() {
         return "User{" +
@@ -28,7 +28,7 @@ public class RegistUserDTO {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
-                ", address='" + address + '\'' +
+                ", address='" + gender + '\'' +
                 '}';
     }
 }

@@ -3,7 +3,6 @@ package com.primitive.privacy_contest.Repository.UserPersonalInfo;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -38,9 +37,6 @@ public class UserPersonalInfo {
 
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
-
-    @Column(name = "address", columnDefinition = "TEXT")
-    private String address;
 
     @Column(name = "registration_date", nullable = false, updatable = false)
     @Builder.Default

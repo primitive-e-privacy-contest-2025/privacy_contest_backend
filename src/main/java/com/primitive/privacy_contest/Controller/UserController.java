@@ -64,7 +64,6 @@ public class UserController {
                                             "  \"email\": \"hong@example.com\",\n" +
                                             "  \"phoneNumber\": \"010-1234-5678\",\n" +
                                             "  \"dateOfBirth\": \"1990-01-01\",\n" +
-                                            "  \"address\": \"서울시 강남구 테헤란로 123\",\n" +
                                             "  \"googleUserId\": \"null\"\n" +
                                             "}"
                             )

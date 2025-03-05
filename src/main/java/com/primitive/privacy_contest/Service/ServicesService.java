@@ -1,7 +1,6 @@
 package com.primitive.privacy_contest.Service;
 
 import com.primitive.privacy_contest.DTO.GetServiceDataDTO;
-import com.primitive.privacy_contest.DTO.RegistCorporateUserDTO;
 import com.primitive.privacy_contest.DTO.RegistServiceDTO;
 import com.primitive.privacy_contest.DTO.ServiceRegistDTO;
 import com.primitive.privacy_contest.Repository.CorporateUsers.CorporateUsers;
@@ -9,12 +8,12 @@ import com.primitive.privacy_contest.Repository.CorporateUsers.CorporateUsersRep
 import com.primitive.privacy_contest.Repository.Services.ServiceStatus;
 import com.primitive.privacy_contest.Repository.Services.Services;
 import com.primitive.privacy_contest.Repository.Services.ServicesRepository;
+import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInfo;
 import com.primitive.privacy_contest.SeedGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.imageio.spi.ServiceRegistry;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +26,8 @@ public class ServicesService {
     ServicesRepository servicesRepository;
     @Autowired
     CorporateUsersRepository corporateUsersRepository;
+    @Autowired
+    UserService userService;
 
     public ServiceRegistDTO registerService(RegistServiceDTO registServiceDTO){
         try {
@@ -54,7 +55,7 @@ public class ServicesService {
 
     }
 
-    public List<Services> getService(Long corporateId){
+    public List<Services> getServiceByCorp(Long corporateId){
         try {
             CorporateUsers corporateUser = corporateUsersRepository.findById(corporateId).get();
             List<Services> list = servicesRepository.findByCorporateUsers(corporateUser);
@@ -64,6 +65,7 @@ public class ServicesService {
             return list;
         }
     }
+
 
     public Integer patchService(String ServiceID, GetServiceDataDTO dataDTO) {
         try {

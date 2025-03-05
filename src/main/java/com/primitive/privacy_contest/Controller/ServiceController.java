@@ -63,7 +63,7 @@ public class ServiceController {
         return ResponseEntity.ok(serviceRegistDTO);
     }
 
-    @GetMapping
+    @GetMapping("corp/{corporateId}")
     @Operation(
             summary = "서비스 조회",
             description = "특정 기업(corporate_id)에 속한 서비스 목록을 조회합니다.",
@@ -85,12 +85,12 @@ public class ServiceController {
                     )
             }
     )
-    public ResponseEntity<List<Services>> getServices(@RequestParam("corporate_id") Long corporateId) {
-        List<Services> services = servicesService.getService(corporateId);
+    public ResponseEntity<List<Services>> getServices(@PathVariable("corporate_id") Long corporateId) {
+        List<Services> services = servicesService.getServiceByCorp(corporateId);
         return ResponseEntity.ok(services);
     }
 
-    @PatchMapping("/{service_id}/reset-key")
+    /*@PatchMapping("/{service_id}/reset-key")
     @Operation(
             summary = "API 키 재설정",
             description = "특정 서비스의 API 키를 재설정합니다. (현재는 미구현 상태로, 예시 메시지와 함께 새로운 API 키가 반환됩니다.)",
@@ -113,5 +113,5 @@ public class ServiceController {
                 "message", "API key reset",
                 "new_api_key", "NEW_API_KEY_67890"
         ));
-    }
+    }*/
 }

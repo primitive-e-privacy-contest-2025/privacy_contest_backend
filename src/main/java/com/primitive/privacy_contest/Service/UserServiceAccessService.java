@@ -1,14 +1,17 @@
 package com.primitive.privacy_contest.Service;
 
+import com.primitive.privacy_contest.Repository.Services.Services;
 import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInfo;
 import com.primitive.privacy_contest.Repository.UserPersonalInfo.UserPersonalInfoRepository;
 import com.primitive.privacy_contest.Repository.UserServiceAccess.AccessStatus;
 import com.primitive.privacy_contest.Repository.UserServiceAccess.UserServiceAccess;
 import com.primitive.privacy_contest.Repository.UserServiceAccess.UserServiceAccessRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +19,8 @@ public class UserServiceAccessService {
 
     private final UserServiceAccessRepository userServiceAccessRepository;
     private final UserPersonalInfoRepository userRepository;
+    @Autowired
+    private UserService userService;
 
     public UserServiceAccessService(UserServiceAccessRepository userServiceAccessRepository, UserPersonalInfoRepository userRepository) {
         this.userServiceAccessRepository = userServiceAccessRepository;
