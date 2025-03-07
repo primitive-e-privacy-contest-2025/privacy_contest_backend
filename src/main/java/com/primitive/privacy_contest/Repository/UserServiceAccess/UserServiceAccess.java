@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user_service_access")
@@ -14,7 +15,6 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Builder
 public class UserServiceAccess {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "access_id")
@@ -22,7 +22,7 @@ public class UserServiceAccess {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserPersonalInfo user; // 사용자 정보 (FK)
+    private UserPersonalInfo user;
 
     @Column(name = "service_id", nullable = false)
     private Long serviceId; // 서비스 ID
@@ -35,11 +35,11 @@ public class UserServiceAccess {
     private boolean accessGranted;
 
     @Column(name = "access_started")
-    private Timestamp accessStarted;
+    private LocalDateTime accessStarted;
 
     @Column(name = "access_ended")
-    private Timestamp accessEnded;
+    private LocalDateTime accessEnded;
 
     @Column(name = "last_access_time")
-    private Timestamp lastAccessTime;
+    private LocalDateTime lastAccessTime;
 }

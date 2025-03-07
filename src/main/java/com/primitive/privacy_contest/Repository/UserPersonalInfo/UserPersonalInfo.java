@@ -3,8 +3,8 @@ package com.primitive.privacy_contest.Repository.UserPersonalInfo;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "User_Personal_Info")
@@ -38,16 +38,15 @@ public class UserPersonalInfo {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    @Column(name = "address", columnDefinition = "TEXT")
-    private String address;
-
     @Column(name = "registration_date", nullable = false, updatable = false)
-    private Timestamp registrationDate;
+    @Builder.Default
+    private LocalDateTime registrationDate = LocalDateTime.now(); // 유저 가입일
 
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     @Column(name = "status")
-    private AccountStatus status;
+    private AccountStatus status=AccountStatus.ACTIVE;
 
-    @Column(name = "google_user_id", length = 255)
+    @Column(name = "google_user_id", length = 255,nullable = true)
     private String googleUserId;
 }
